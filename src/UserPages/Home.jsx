@@ -18,7 +18,6 @@ const Home = () => {
         setLoading(false);
       }
     };
-
     fetchMovies();
   }, []);
 

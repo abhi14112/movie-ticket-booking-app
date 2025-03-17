@@ -8,7 +8,7 @@ const Bookings = () => {
 
     useEffect(() => {
         axiosInstance
-            .get(`/api/cinema/bookings/${id}`) // Fetch user-specific bookings
+            .get(`/api/cinema/bookings/${id}`)
             .then((response) => setBookings(response.data))
             .catch((error) => console.error("Error fetching bookings:", error));
     }, [id]);
@@ -36,7 +36,12 @@ const Bookings = () => {
                             <p className="text-gray-500">
                                 <strong>Booking Time:</strong> {new Date(booking.bookingTime).toLocaleString()}
                             </p>
-
+                            <p className="text-gray-500">
+                                <strong>Status:</strong> {booking.status}
+                            </p>
+                            <p className="text-gray-500">
+                                <strong>Amount:</strong> {booking.amount}
+                            </p>
                             <div className="mt-4">
                                 <p className="text-gray-700 font-medium">Seats:</p>
                                 <div className="flex gap-2 mt-2">
@@ -57,5 +62,4 @@ const Bookings = () => {
         </div>
     );
 };
-
 export default Bookings;
