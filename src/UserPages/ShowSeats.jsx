@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 import useAuthStore from "../store/useAuthStore.js";
 import { useNavigate } from 'react-router-dom';
 const ShowSeats = () => {
-
     const navigate = useNavigate();
     const user = useAuthStore((state) => state.user);
     const location = useLocation();
@@ -21,6 +20,7 @@ const ShowSeats = () => {
             try {
                 const response = await axiosInstance.get(`api/Cinema/GetShowSeats/${showId}`);
                 setSeatsData(response.data);
+                console.log(response.data);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching seats:', error);
@@ -29,8 +29,7 @@ const ShowSeats = () => {
         };
         fetchSeats();
     }, [showId]);
-
-    const createOrder = async () => {
+    const createOrder = async (bookingId) => {
         try {
             setLoading(true);
             let amount = ticketPrice * selectedSeats.length;
@@ -38,7 +37,7 @@ const ShowSeats = () => {
                 amount: amount,
                 currency: "USD",
                 returnUrl: "http://localhost:5173/success",
-                cancelUrl: "http://localhost:5173/cancel",
+                cancelUrl: `http://localhost:5173/cancel/${bookingId}`,
             });
             const approvalUrl = response.data.links.find(link => link.rel === "approve")?.href;
             if (approvalUrl) {
@@ -91,11 +90,13 @@ const ShowSeats = () => {
         if (!selectedSeatsId.length)
             return;
         try {
-            await axiosInstance.post(`/api/Cinema/BookSeats`, { Ids: selectedSeatsId, cinemaId, showId, userId: user.id });
+            let amount = ticketPrice * selectedSeats.length;
+            const res = await axiosInstance.post(`/api/Cinema/BookSeats`, { Ids: selectedSeatsId, cinemaId, showId, userId: user.id, amount: amount });
+            console.log(res.data);
+            createOrder(res.data.bookingId);
         } catch (error) {
             console.log(error);
         }
-        createOrder();
     }
     if (loading) {
         return <div className="flex justify-center items-center h-64">Loading seats...</div>;
