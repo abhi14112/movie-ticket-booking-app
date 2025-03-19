@@ -20,6 +20,10 @@ const Navbar = () => {
                     }
                     {
                         user.role == 'Admin' &&
+                        <Link to={`/admin/addMovie`}>Add Movie</Link>
+                    }
+                    {
+                        user.role == 'Admin' &&
                         <Link to={`/admin/bookings`}>Bookings</Link>
                     }
                     {

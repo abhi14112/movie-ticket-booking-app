@@ -7,7 +7,6 @@ const MovieCard = ({ movie }) => {
     const handleClick = () => {
         navigate(`/movie/${movie.id}`, { state: { movie } });
     };
-
     return (
         <div
             className="bg-white rounded-lg shadow-lg hover:cursor-pointer overflow-hidden w-60"

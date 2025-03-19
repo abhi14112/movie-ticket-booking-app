@@ -19,6 +19,7 @@ import AllBookings from './AdminPages/AllBookings.jsx'
 // import Checkout from './UserPages/Checkout.jsx'
 import Success from './UserPages/Success.jsx'
 import Cancel from './UserPages/Cancel.jsx'
+import AddMovie from './AdminPages/AddMovie.jsx'
 const App = () => {
     const user = useAuthStore(state => state.user)
     return (
@@ -29,6 +30,7 @@ const App = () => {
                     <Route index element={<Cinemas />} />
                     <Route path='/admin/bookings' element={<AllBookings />} />
                     <Route path='/admin/addCinema/:id' element={<AddCinema />} />
+                    <Route path='/admin/addMovie' element={<AddMovie />} />
                     <Route path='/admin/addShow/:id' element={<AddShow />} />
                     <Route path='/admin/shows/:id' element={<Shows />} />
                     <Route path='/admin/showDetails/:id' element={<ShowDetails />} />
