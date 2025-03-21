@@ -43,7 +43,7 @@ const App = () => {
                     <Route path="/seats/:showId" element={user ? <ShowSeats /> : <Navigate to={"/"} />} />
                     {/* <Route path="/checkout" element={user ? <Checkout /> : <Navigate to={"/"} />} /> */}
                     <Route path="/success" element={user ? <Success /> : <Navigate to={"/"} />} />
-                    <Route path="/cancel" element={user ? <Cancel /> : <Navigate to={"/"} />} />
+                    <Route path="/cancel/:id" element={user ? <Cancel /> : <Navigate to={"/"} />} />
 
                 </Route>
                 <Route path='/login' element={!user ? <Login /> : <Navigate to={"/"} />} />

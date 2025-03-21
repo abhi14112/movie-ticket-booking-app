@@ -9,7 +9,6 @@ const ShowSeats = () => {
     const user = useAuthStore((state) => state.user);
     const location = useLocation();
     let { seats, cinemaId, ticketPrice } = location.state || {};
-
     const [seatsData, setSeatsData] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedSeatsId, setSelectedSeatsId] = useState([]);
@@ -41,10 +40,7 @@ const ShowSeats = () => {
             });
             const approvalUrl = response.data.links.find(link => link.rel === "approve")?.href;
             if (approvalUrl) {
-                if (approvalUrl == "http://localhost:5173/success")
-                    navigate("/success");
-                else
-                    window.location.href = approvalUrl;
+                window.location.href = approvalUrl;
             }
         } catch (error) {
             console.error("Error creating order:", error);
